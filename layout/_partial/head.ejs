@@ -120,6 +120,9 @@
 
     <%- partial('_partial/config_css') %>
 
+    <!-- PrismJS -->
+    <%- cssLsload('css/prism.tomorrow-night.full.min.css') %>
+
     <!-- Import jQuery -->
     <% if(theme.vendors.jquery) { %>
         <%- jsLsload({path:(theme.vendors.jquery),key:'jq_js'}) %>
