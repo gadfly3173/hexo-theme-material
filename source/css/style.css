@@ -3069,7 +3069,7 @@ a {
 /*****************/
 /* Nprogress_CSS */
 /*****************/
--#nprogress {
+#nprogress {
   pointer-events: none;
 }
 
