@@ -2386,31 +2386,27 @@ a {
 .theme-color-switch .mdl-switch__thumb {
   left: 2px;
   top: 2px;
+  font-size: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .theme-color-switch .mdl-switch.is-checked .mdl-switch__thumb {
   left: 26px;
   background-color: #1a1a1a;
-  display: inline-block;
-  vertical-align: middle;
 }
 
-.theme-color-switch .mdl-switch .mdl-switch__thumb::after {
+.theme-color-switch .mdl-switch .mdl-switch__thumb::before {
   content: '\e430';
   color: rgba(60, 60, 60, .7);
   text-shadow: none;
-  width: 0;
-  line-height: 110%;
-  height: 110%;
-  display: inline-block;
-  vertical-align: middle;
-  margin-left: -60%;
+  display: contents;
 }
 
-.theme-color-switch .mdl-switch.is-checked .mdl-switch__thumb::after {
+.theme-color-switch .mdl-switch.is-checked .mdl-switch__thumb::before {
   content: '\ea46';
   color: #fff;
-  margin-left: -40%;
 }
 
 .sidebar .sidebar-divider,
