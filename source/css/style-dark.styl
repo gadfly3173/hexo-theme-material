@@ -3,6 +3,10 @@
   --default-text: #bebebe
   --default-line: #44484b
   --scrollbar-background: #2a2c2d
+  --table-border: #444
+  --table-header-bg: #333
+  --table-row-bg: #2a2c2d
+  --table-row-alt-bg: #353739
   &::-webkit-scrollbar {
     background-color: var(--scrollbar-background)
     color: #a7a096
@@ -13,9 +17,64 @@
   &::-webkit-scrollbar-thumb {
     background-color: #4b4f52
   }
-  &::selection {
-    background-color: #0d52a6 !important
-    color: #dedcd9 !important
+  // Text selection in dark mode - override material.css defaults globally.
+  // IMPORTANT: ::selection and ::-moz-selection MUST be in separate rule blocks.
+  // Mixing them in one group causes Chrome/Safari to drop the entire rule (CSS error recovery).
+  // Background-only on the broad rule; color: #fff only for non-code elements,
+  // because Chrome does not propagate `color: inherit` correctly for ::selection.
+  &::selection,
+  *::selection {
+    background-color: #1a4b8c
+    text-shadow: none
+  }
+  &::-moz-selection,
+  *::-moz-selection {
+    background-color: #1a4b8c
+    text-shadow: none
+  }
+  // Non-code elements: force white text so selection is readable on dark background
+  :not(pre):not(pre *)::selection {
+    color: #fff
+  }
+  :not(pre):not(pre *)::-moz-selection {
+    color: #fff
+  }
+  // Preserve Prism token colors in code block selection.
+  // Chrome defaults to white when background-color is set in ::selection without color.
+  // color: currentColor resolves to the element's own computed color, restoring token colors.
+  pre[class*="language-"]::selection,
+  pre[class*="language-"] *::selection,
+  code[class*="language-"]::selection,
+  code[class*="language-"] *::selection {
+    color: currentColor
+  }
+  pre[class*="language-"]::-moz-selection,
+  pre[class*="language-"] *::-moz-selection,
+  code[class*="language-"]::-moz-selection,
+  code[class*="language-"] *::-moz-selection {
+    color: currentColor
+  }
+  // Table styles for dark mode
+  #post-content table {
+    border-color: var(--table-border)
+  }
+  #post-content table th,
+  #post-content table td {
+    border-color: var(--table-border)
+  }
+  #post-content table th {
+    background-color: var(--table-header-bg)
+    color: #dedcd9
+  }
+  #post-content table tr {
+    background-color: var(--table-row-bg)
+  }
+  #post-content table tr:nth-child(2n) {
+    background-color: var(--table-row-alt-bg)
+  }
+  // Table header row in tbody (first tr)
+  #post-content table tbody tr:first-child th {
+    background-color: var(--table-header-bg)
   }
   body&,
   input,
